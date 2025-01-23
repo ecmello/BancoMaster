@@ -1,24 +1,22 @@
 ﻿using BMTeste.Application.Business;
 using BMTeste.Domain.Models.Interface;
+using BMTeste.Infrastructure.CrossCutting.SistemaDeArquivos;
 using BMTeste.Infrastructure.Data;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace BMTeste.CrossCutting.IOC
+namespace BMTeste.Test.IOC
 {
-    public class DispositivoDeTeste : IDisposable
+    public class IOC4Test : IDisposable
     {
         public ServiceProvider ServiceProvider { get; private set; }
 
-        public DispositivoDeTeste()
+        public IOC4Test()
         {
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddTransient<IRotaBusiness, RotaBusiness>();
             serviceCollection.AddTransient<IRotaRepository, RotaRepository>();
+            serviceCollection.AddTransient<IOperacoesArquivoDadosBusiness, OperacoesArquivoDadosBusiness>();
+            serviceCollection.AddTransient<IOperacoesArquivoDadosFileSystem, OperacoesArquivoDadosFileSystem>();
             ServiceProvider = serviceCollection.BuildServiceProvider();
         }
 

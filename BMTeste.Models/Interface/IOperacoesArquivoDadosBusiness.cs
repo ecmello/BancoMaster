@@ -1,6 +1,4 @@
-﻿using BMTeste.Domain.Models;
-
-namespace BMTeste.Domain.Models.Interface
+﻿namespace BMTeste.Domain.Models.Interface
 {
     public interface IOperacoesArquivoDadosBusiness
     {

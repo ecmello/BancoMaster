@@ -1,14 +1,14 @@
-﻿using BMTeste.Domain.Models;
-using BMTeste.Domain.Models.Interface;
+﻿using BMTeste.Domain.Models.Interface;
 
 namespace BMTeste.Infrastructure.CrossCutting.SistemaDeArquivos
 {
     public class OperacoesArquivoDadosFileSystem : IOperacoesArquivoDadosFileSystem
     {
-        private static string ArquivoDados = $"{AppDomain.CurrentDomain.BaseDirectory}\\{System.Configuration.ConfigurationManager.AppSettings["NomeDoArquivoDeDados"].ToString()}";
+        private static string ArquivoDados = $"{AppDomain.CurrentDomain.BaseDirectory}\\{System.Configuration.ConfigurationManager.AppSettings["NomeDoArquivoDeDados"]}";
 
-        public bool ApagarArquivoDados()
+        public bool ApagarArquivoDados(string? caminhoArquivo = null)
         {
+            ArquivoDados = caminhoArquivo != null ? caminhoArquivo : ArquivoDados;
             bool resultado = false;
             try
             {
@@ -43,12 +43,14 @@ namespace BMTeste.Infrastructure.CrossCutting.SistemaDeArquivos
 
         public bool ExisteArquivoDados(string? caminhoArquivo = null)
         {
+            ArquivoDados = caminhoArquivo != null ? caminhoArquivo : ArquivoDados;
             return File.Exists(ArquivoDados);
         }
 
-        public bool GravarArquivoDados(string[] linhas)
+        public bool GravarArquivoDados(string[] linhas, string? caminhoArquivo = null)
         {
             bool _resultado = false;
+            ArquivoDados = caminhoArquivo != null ? caminhoArquivo : ArquivoDados;
             try
             {
                 using (StreamWriter sw = new StreamWriter(ArquivoDados, append: true))

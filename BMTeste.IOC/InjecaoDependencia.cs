@@ -2,7 +2,6 @@
 using BMTeste.Domain.Models.Interface;
 using BMTeste.Infrastructure.CrossCutting.SistemaDeArquivos;
 using BMTeste.Infrastructure.Data;
-
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BMTeste.Infrastructure.CrossCutting.IOC
