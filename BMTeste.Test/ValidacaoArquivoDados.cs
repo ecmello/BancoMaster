@@ -7,11 +7,11 @@ namespace BMTeste.Test
     public class ValidacaoArquivoDados : IClassFixture<DispositivoDeTeste>
     {
 
-        private readonly ISistemaDeArquivos _sistemaDeArquivos;
+        private readonly IOperacoesArquivoDadosFileSystem _sistemaDeArquivos;
 
         public ValidacaoArquivoDados(DispositivoDeTeste dispositivo)
         {
-            _sistemaDeArquivos = dispositivo.ServiceProvider.GetRequiredService<ISistemaDeArquivos>();
+            _sistemaDeArquivos = dispositivo.ServiceProvider.GetRequiredService<IOperacoesArquivoDadosFileSystem>();
         }
 
         [Fact]

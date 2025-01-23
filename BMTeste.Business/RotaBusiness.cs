@@ -6,9 +6,10 @@ namespace BMTeste.Application.Business
     public class RotaBusiness : IRotaBusiness
     {
         private static string _ENTRADA_INCORRETA_ = "Entrada não reconhecida! Utilize o formato XXX-XXX para informar a rota desejada";
-        private static string _LOCALIDADE_INEXISTENTE_ = "Não foi encontrada a origem e/ou destino no cadastro";
+        private static string _LOCALIDADE_INEXISTENTE_ = "Não foi encontrada a origem e/ou destino no cadastro de rotas";
 
         private readonly IRotaRepository _rotaRepository;
+        public IEnumerable<Rota> Rotas { get { return _rotaRepository.Rotas; } }
 
         public RotaBusiness(IRotaRepository rotaRepository) 
         {
@@ -22,8 +23,9 @@ namespace BMTeste.Application.Business
 
         public Trajeto ObterMelhorRota(Rota rotaDesejada)
         {
+            Trajeto MelhorRota = null;
             IEnumerable<Trajeto> completas = new List<Trajeto>();
-            IEnumerable<Rota> origens = _rotaRepository.Rotas.Where(r => r.Origem == rotaDesejada.Origem);
+            IEnumerable<Rota> origens = Rotas.Where(r => r.Origem == rotaDesejada.Origem);
             IEnumerable<Rota> conexoes = [];
             IEnumerable<string> localidadesJaAlcancadas;
 
@@ -84,10 +86,11 @@ namespace BMTeste.Application.Business
 
             //extraindo Rotas completas e com destino correspondente
             var RotasExistentes = completas.Where(c => c.Sucesso = true && c.Finalizada == true);
-
-            //escolhendo a mais barata das rotas existente.
-            var MelhorRota = RotasExistentes.OrderBy(m => m.custo).First();
-
+            //escolhendo a mais barata das rotas existente se existir.
+            if (RotasExistentes.ToList().Count() > 0)
+            {
+                MelhorRota = RotasExistentes.OrderBy(m => m.custo).First();
+            }
             return MelhorRota;
         }
 

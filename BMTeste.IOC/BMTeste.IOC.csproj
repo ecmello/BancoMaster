@@ -18,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BMTeste.Business\BMTeste.Business.csproj" />
     <ProjectReference Include="..\BMTeste.Data\BMTeste.Data.csproj" />
+    <ProjectReference Include="..\SistemaDeArquivos\BMTeste.FileSystem.csproj" />
   </ItemGroup>
 
 </Project>

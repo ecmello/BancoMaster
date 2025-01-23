@@ -6,11 +6,11 @@ namespace BMTeste.Infrastructure.Data
 {
     public class RotaRepository : IRotaRepository
     {
-        private readonly ISistemaDeArquivos _sistemaDeArquivos;
+        private readonly IOperacoesArquivoDadosBusiness _sistemaDeArquivos;
         private IEnumerable<Rota> _rotas;
         public IEnumerable<Rota> Rotas { get { return _rotas; } }
 
-        public RotaRepository(ISistemaDeArquivos sistemaDeArquivos)
+        public RotaRepository(IOperacoesArquivoDadosBusiness sistemaDeArquivos)
         {
             _sistemaDeArquivos = sistemaDeArquivos;
             _rotas = ObterRotas(_sistemaDeArquivos.ExisteArquivoDados());

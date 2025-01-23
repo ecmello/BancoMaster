@@ -1,15 +1,9 @@
 ﻿using BMTeste.Application.Business;
-using BMTeste.Business;
 using BMTeste.Domain.Models.Interface;
+using BMTeste.Infrastructure.CrossCutting.SistemaDeArquivos;
 using BMTeste.Infrastructure.Data;
-using BMTeste.IOC;
-using Microsoft.Extensions.Configuration;
+
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BMTeste.Infrastructure.CrossCutting.IOC
 {
@@ -20,8 +14,9 @@ namespace BMTeste.Infrastructure.CrossCutting.IOC
             var serviceProvider = new ServiceCollection()
                 .AddScoped<IRotaBusiness,RotaBusiness>()
                 .AddScoped<IRotaRepository,RotaRepository>()
-                .AddSingleton<ISistemaDeArquivos,SistemaDeArquivos>()
-                .AddSingleton<AplicacaoBusiness>(x => new AplicacaoBusiness(x.GetRequiredService<IRotaBusiness>(), x.GetRequiredService<ISistemaDeArquivos>()))
+                .AddSingleton<IOperacoesArquivoDadosBusiness, OperacoesArquivoDadosBusiness>()
+                .AddSingleton<IOperacoesArquivoDadosFileSystem, OperacoesArquivoDadosFileSystem>()
+                .AddSingleton<AplicacaoBusiness>(x => new AplicacaoBusiness(x.GetRequiredService<IRotaBusiness>(), x.GetRequiredService<IOperacoesArquivoDadosBusiness>()))
                 .BuildServiceProvider();
             return serviceProvider;
         }

@@ -1,12 +1,9 @@
 ﻿using BMTeste.Domain.Models;
 using BMTeste.Domain.Models.Interface;
-using Microsoft.Extensions.Configuration;
-using System.Configuration;
-using System.IO;
-using System.Net.NetworkInformation;
-namespace BMTeste.IOC
+
+namespace BMTeste.Infrastructure.CrossCutting.SistemaDeArquivos
 {
-    public class SistemaDeArquivos : ISistemaDeArquivos
+    public class OperacoesArquivoDadosFileSystem : IOperacoesArquivoDadosFileSystem
     {
         private static string ArquivoDados = $"{AppDomain.CurrentDomain.BaseDirectory}\\{System.Configuration.ConfigurationManager.AppSettings["NomeDoArquivoDeDados"].ToString()}";
 
@@ -25,10 +22,12 @@ namespace BMTeste.IOC
             return resultado;
         }
 
-        public string[] CarregarArquivoDados()
+        public string[] CarregarArquivoDados(string? caminhoArquivo = null)
         {
             List<string> resultado = new List<string>();
+            ArquivoDados = caminhoArquivo != null ? caminhoArquivo : ArquivoDados;
             string? linha = null;
+            
             using (StreamReader sr = new StreamReader(ArquivoDados))
             {
                 linha = sr.ReadLine();
@@ -38,46 +37,31 @@ namespace BMTeste.IOC
                     linha = sr.ReadLine();
                 }
             }
+            
             return resultado.ToArray();
         }
 
-        public bool ExisteArquivoDados()
+        public bool ExisteArquivoDados(string? caminhoArquivo = null)
         {
             return File.Exists(ArquivoDados);
         }
 
-        public bool GravarArquivoDados(IEnumerable<Rota> rotas)
+        public bool GravarArquivoDados(string[] linhas)
         {
             bool _resultado = false;
-            IEnumerable<string> _linhas = new List<string>();
-            foreach (var _rota in rotas)
-            {
-                _linhas = _linhas.Append(ConverterParaLinha(_rota));
-            }
             try
             {
                 using (StreamWriter sw = new StreamWriter(ArquivoDados, append: true))
                 {
-                    foreach(var linha in _linhas) sw.WriteLine(linha);
+                    foreach(var _linha in linhas) sw.WriteLine(_linha);
                 }
                 _resultado = true;
             }
-            catch (Exception ex)
+            catch
             {
                 //não é necessário fazer nada
             }
             return _resultado;
         }
-
-        private string ConverterParaLinha(Rota rota)
-        {
-            return string.Join(',', new object[]
-            {
-                rota.Origem,
-                rota.Destino,
-                rota.Valor
-            });
-        }
-
     }
 }

@@ -7,12 +7,11 @@ using System.Threading.Tasks;
 
 namespace BMTeste.Domain.Models.Interface
 {
-    public interface ISistemaDeArquivos
+    public interface IOperacoesArquivoDadosFileSystem
     {
-        bool ExisteArquivoDados();
+        bool ExisteArquivoDados(string? caminhoArquivo = null);
         bool ApagarArquivoDados();
-        bool GravarArquivoDados(IEnumerable<Rota> rotas);
-        string[] CarregarArquivoDados();
-        bool ImportarArquivo(string caminhoArquivo);
+        bool GravarArquivoDados(string[] linhas);
+        string[] CarregarArquivoDados(string? caminhoArquivo = null);
     }
 }

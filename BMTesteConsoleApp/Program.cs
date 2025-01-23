@@ -1,4 +1,4 @@
-﻿using BMTeste.Business;
+﻿using BMTeste.Application.Business;
 using BMTeste.Infrastructure.CrossCutting.IOC;
 using Microsoft.Extensions.DependencyInjection;
 
