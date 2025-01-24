@@ -18,6 +18,7 @@ A estrutura dos arquivos segue o padrão DDD, com um executável mínimo apenas 
 ***
 </br>
 ###TO DO :###</br>
+- Aumentar a cobertura dos testes 
 - Incluir verificação de integridade à arquivos a importar, com check de colunas e tipos de dados no arquivo para recusa em caso de estar não-conforme.
 - Incluir verificação de dados quando da inclusão manual de uma nova rota.
 - Incluir funcionalidade de alterar rota cadastrada
