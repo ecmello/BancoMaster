@@ -5,7 +5,7 @@ Sistema que elege a melhor rota entre aeroportos no critério de menor custo.
 ##Como executar a aplicação##
 Após clonar o repositório, basta apenas digitar na linha de comando :  
 
-`...>dotnet run --project BMTeste.sln.`  
+`...\BMTeste\>dotnet run --project .\BMTesteConsoleApp\BMTeste.ConsoleApp.csproj`  
 
 Para executar os testes digite na linha de comandos :</br>
 
@@ -19,6 +19,8 @@ A estrutura dos arquivos segue o padrão DDD, com um executável mínimo apenas 
 ##TO DO :##
 - Incluir verificação de integridade à arquivos a importar, com check de colunas e tipos de dados no arquivo para recusa em caso de estar não-conforme.
 - Incluir verificação de dados quando da inclusão manual de uma nova rota.
+- Incluir funcionalidade de alterar rota cadastrada
+- Incluir funcionadadade de excluir rota cadastrada
 
 ***
 </br>
